@@ -4,27 +4,29 @@
 #include "ulamspiral.h"
 #include "utils.h"
 
-uchr *createUlamSpiral(unsigned int width)
+UlamSpiral *createUlamSpiral(uint length)
 {
-    unsigned int i;
-    static uchr *ulamSpiral;
-    ulamSpiral = (uchr *) malloc(width * width * sizeof(uchr));
+    uint i;
+    uchr *array;
+    static UlamSpiral us;
 
-    for (i = 0; i < width*width; i++)
-        ulamSpiral[i] = isPrime(i + 1);
+    array = (uchr *) malloc(length * length * sizeof(uchr));
+    for (i = 0; i < length*length; i++)
+        array[i] = isPrime(i + 1);
 
-    return ulamSpiral;
+    us = (UlamSpiral) { length, array };
+    return &us;
 }
 
-void drawUlamSpiral(uchr *ulamSpiral, SDL_Renderer *renderer)
+void drawUlamSpiral(UlamSpiral *us, SDL_Renderer *renderer)
 {
-    int i, j, x, y, ox, oy, e, size;
+    uint i, j, x, y, ox, oy, e, size;
     x = 0;
     y = 0;
-    ox = WIDTH / 2;
-    oy = WIDTH / 2;
+    ox = us->length / 2;
+    oy = us->length / 2;
     e = 1;
-    size = WIDTH * WIDTH;
+    size = us->length * us->length;
 
     for (i = 0; i < size; i += (2 * e))
     {
@@ -34,7 +36,7 @@ void drawUlamSpiral(uchr *ulamSpiral, SDL_Renderer *renderer)
                 x--;
             else
                 x++;
-            if (ulamSpiral[i + j])
+            if (us->array[i + j])
                 SDL_RenderDrawPoint(renderer, ox + x, oy + y);
         }
         for (j = 0; j < e; j++)
@@ -43,10 +45,11 @@ void drawUlamSpiral(uchr *ulamSpiral, SDL_Renderer *renderer)
                 y++;
             else
                 y--;
-            if (ulamSpiral[i + j + e])
+            if (us->array[i + j + e])
                 SDL_RenderDrawPoint(renderer, ox + x, oy + y);
         }
 
         e++;
     }
 }
+

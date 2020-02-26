@@ -4,10 +4,14 @@
 #include <SDL2/SDL.h>
 
 #define uchr unsigned char
+#define uint unsigned int
 
-#define WIDTH 600
+typedef struct ulamSpiral {
+    uint length;
+    uchr *array;
+} UlamSpiral;
 
-uchr *createUlamSpiral(unsigned int width);
-void drawUlamSpiral(uchr *ulamSpiral, SDL_Renderer *renderer);
+UlamSpiral *createUlamSpiral(uint length);
+void drawUlamSpiral(UlamSpiral *us, SDL_Renderer *renderer);
 
 #endif

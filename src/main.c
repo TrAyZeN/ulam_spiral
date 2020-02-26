@@ -6,6 +6,8 @@
 
 #include "ulamspiral.h"
 
+#define WIDTH 600
+
 int main(void)
 {
     SDL_Window *window;
@@ -35,7 +37,7 @@ int main(void)
         return 1;
     }
 
-    unsigned char *ulamSpiral = createUlamSpiral(WIDTH);
+    UlamSpiral *ulamSpiral = createUlamSpiral(WIDTH);
 
     // Clears the screen
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
