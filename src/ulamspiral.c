@@ -18,32 +18,35 @@ uchr *createUlamSpiral(unsigned int width)
 
 void drawUlamSpiral(uchr *ulamSpiral, SDL_Renderer *renderer)
 {
-    int X = WIDTH / 2;
-    int Y = WIDTH / 2;
-    int x = 0;
-    int y = 0;
-    int e = 1;
+    int i, j, x, y, ox, oy, e, size;
+    x = 0;
+    y = 0;
+    ox = WIDTH / 2;
+    oy = WIDTH / 2;
+    e = 1;
+    size = WIDTH * WIDTH;
 
-    for (int i = 0; i < (WIDTH * WIDTH); i += (2 * e))
+    for (i = 0; i < size; i += (2 * e))
     {
-        for (int j = 0; j < e; j++)
+        for (j = 0; j < e; j++)
         {
             if (e%2 == 0)
                 x--;
             else
                 x++;
-            if (ulamSpiral[i + j] == 1)
-                SDL_RenderDrawPoint(renderer, X + x, Y + y);
+            if (ulamSpiral[i + j])
+                SDL_RenderDrawPoint(renderer, ox + x, oy + y);
         }
-        for (int j = 0; j < e; j++)
+        for (j = 0; j < e; j++)
         {
             if (e%2 == 0)
                 y++;
             else
                 y--;
-            if (ulamSpiral[i + j + e] == 1)
-                SDL_RenderDrawPoint(renderer, X + x, Y + y);
+            if (ulamSpiral[i + j + e])
+                SDL_RenderDrawPoint(renderer, ox + x, oy + y);
         }
+
         e++;
     }
 }
