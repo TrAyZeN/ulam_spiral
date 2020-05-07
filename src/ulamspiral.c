@@ -7,15 +7,21 @@
 UlamSpiral *createUlamSpiral(uint length)
 {
     uint i;
-    uchr *array;
-    static UlamSpiral us;
+    static UlamSpiral *us;
+    us = (UlamSpiral *) malloc(sizeof(UlamSpiral));
+    if (us == NULL)
+    {
+        fprintf(stderr, "Failed to create ulam spiral\n");
+        exit(EXIT_FAILURE);
+    }
 
-    array = (uchr *) malloc(length * length * sizeof(uchr));
+    us->length = length;
+
+    us->array = (uchr *) malloc(length * length * sizeof(uchr));
     for (i = 0; i < length*length; i++)
-        array[i] = isPrime(i + 1);
+        us->array[i] = isPrime(i + 1);
 
-    us = (UlamSpiral) { length, array };
-    return &us;
+    return us;
 }
 
 void drawUlamSpiral(UlamSpiral *us, SDL_Renderer *renderer)
