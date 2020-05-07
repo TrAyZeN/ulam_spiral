@@ -1,10 +1,8 @@
 #ifndef ULAMSPIRAL_H_
 #define ULAMSPIRAL_H_
 
+#include "utils.h"
 #include <SDL2/SDL.h>
-
-#define uchr unsigned char
-#define uint unsigned int
 
 typedef struct ulamSpiral {
     uint length;

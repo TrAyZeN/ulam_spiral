@@ -1,21 +1,22 @@
+#include "utils.h"
+#include <stdbool.h>
 #include <math.h>
 
-#include "utils.h"
-
 // Naive primilaty test
-unsigned char isPrime(int n)
+uchr isPrime(uint n)
 {
-    int i, s;
+    uint i, s;
 
     if (n == 1 || n%2 == 0)
-        return 0;
+        return false;
 
-    s = (int) sqrt(n);
+    s = (uint) sqrt(n);
     for (i = 3; i <= s; i += 2)
     {
         if (n%i == 0)
-            return 0;
+            return false;
     }
 
-    return 1;
+    return true;
 }
+
