@@ -1,4 +1,15 @@
+*.cmake
+CMakeLists.txt
+CMakeFiles/
+
 ulamspiral
+
+[Dd]ebug/
+[Rr]elease/
+.vs/
+*.vcxproj
+*.vcxproj.*
+*.sln
 *.exe
 *.dll
-
+*.dir/
