@@ -66,6 +66,8 @@ int main(void)
                 break;
             }
         }
+
+        SDL_Delay(100);
     }
 
     SDL_DestroyRenderer(renderer);
