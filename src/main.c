@@ -1,5 +1,3 @@
-#define SDL_MAIN_HANDLED
-
 #include <SDL2/SDL.h>
 #include <stdio.h>
 #include <stdbool.h>
@@ -8,12 +6,11 @@
 
 #define WIDTH 600
 
-int main(void)
+int main(int argc, char *argv[])
 {
     SDL_Window *window;
     SDL_Renderer *renderer;
 
-    SDL_SetMainReady();
     SDL_Init(SDL_INIT_VIDEO);
 
     window = SDL_CreateWindow(
