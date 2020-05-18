@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     {
         fprintf(stderr, "Failed to create window : %s\n",
             SDL_GetError());
-        return 1;
+        goto fail_create_window;
     }
 
     renderer = SDL_CreateRenderer(window, -1,
@@ -31,10 +31,15 @@ int main(int argc, char *argv[])
     {
         fprintf(stderr, "Failed to create renderer : %s\n",
             SDL_GetError());
-        return 1;
+        goto fail_create_renderer;
     }
 
     UlamSpiral *ulamSpiral = createUlamSpiral(WIDTH);
+    if (ulamSpiral == NULL)
+    {
+        fprintf(stderr, "Failed to create ulam spiral\n");
+        goto fail_create_ulamspiral;
+    }
 
     // Clears the screen
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
@@ -64,12 +69,22 @@ int main(int argc, char *argv[])
             }
         }
 
-        SDL_Delay(100);
+        SDL_Delay(100);     // Add delay to reduce CPU usage
     }
 
+    freeUlamSpiral(ulamSpiral);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
 
     return 0;
+
+fail_create_ulamspiral:
+    SDL_DestroyRenderer(renderer);
+fail_create_renderer:
+    SDL_DestroyWindow(window);
+fail_create_window:
+    SDL_Quit();
+
+    return 1;
 }

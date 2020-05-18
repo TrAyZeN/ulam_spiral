@@ -11,5 +11,6 @@ typedef struct ulamSpiral {
 
 UlamSpiral *createUlamSpiral(uint length);
 void drawUlamSpiral(UlamSpiral *us, SDL_Renderer *renderer);
+void freeUlamSpiral(UlamSpiral *us);
 
 #endif
